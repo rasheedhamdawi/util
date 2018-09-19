@@ -69,16 +69,20 @@ func (a *ArrayList) Clear() {
 
 // Remove ...
 func (a *ArrayList) Remove(e Element) error {
+	delete(a.Elements, a.IndexOf(e))
+
+	return nil
+}
+
+// Set ...
+func (a *ArrayList) Set(index int, e Element) error {
+	a.Elements[index] = e
 
 	return nil
 }
 
 // AddAt ...
 func (a *ArrayList) AddAt(index int, e Element) error {
-	return nil
-}
 
-// Set ...
-func (a *ArrayList) Set(index int, e Element) error {
 	return nil
 }
