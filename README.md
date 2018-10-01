@@ -57,5 +57,4 @@ func main() {
 }
 
 ```
-
-check the [documentation]("https://godoc.org/github.com/rasheedhamdawi/util") for more
+check the [documentation](https://godoc.org/github.com/rasheedhamdawi/util) for more
