@@ -8,3 +8,6 @@ type List interface {
 	Set(int, Element) error
 	AddAt(int, Element) error
 }
+
+// Elements ...
+type Elements map[int]Element
