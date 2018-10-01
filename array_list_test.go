@@ -61,6 +61,29 @@ func (suite *ArrayListSuite) TestClear() {
 	assert.Equal(suite.T(), 0, suite.arrayList.Size())
 }
 
+func (suite *ArrayListSuite) TestIterator() {
+	suite.arrayList.Add("Python")
+	suite.arrayList.Add("Go")
+	suite.arrayList.Add("Java")
+
+	iterator := suite.arrayList.Iterator()
+
+	for iterator.HasNext() {
+		assert.Contains(suite.T(), []string{"Go", "Java", "Python"}, iterator.Next())
+	}
+
+}
+
+func (suite *ArrayListSuite) TestForEach() {
+	suite.arrayList.Add("Python")
+	suite.arrayList.Add("Go")
+	suite.arrayList.Add("Java")
+
+	suite.arrayList.ForEach(func(i int, v util.Element) {
+		assert.Contains(suite.T(), []string{"Go", "Java", "Python"}, v)
+	})
+}
+
 func TestArrayListSuite(t *testing.T) {
 	suite.Run(t, new(ArrayListSuite))
 }

@@ -1,8 +1,30 @@
 package util
 
+type arrayListIterator struct {
+	current  int
+	elements Elements
+}
+
+func (a *arrayListIterator) Next() Element {
+	defer func() {
+		a.current++
+	}()
+
+	return a.elements[a.current]
+}
+
+func (a *arrayListIterator) HasNext() bool {
+	if a.current >= len(a.elements) {
+		return false
+	}
+
+	return true
+}
+
 // ArrayList ...
 type ArrayList struct {
-	Elements map[int]Element
+	arrayListIterator
+	Elements
 }
 
 // Size ...
@@ -85,4 +107,16 @@ func (a *ArrayList) Set(index int, e Element) error {
 func (a *ArrayList) AddAt(index int, e Element) error {
 
 	return nil
+}
+
+// ForEach ...
+func (a *ArrayList) ForEach(cb func(int, Element)) {
+	for i, v := range a.Elements {
+		cb(i, v)
+	}
+}
+
+// Iterator ...
+func (a *ArrayList) Iterator() Iterator {
+	return &arrayListIterator{elements: a.Elements, current: 0}
 }

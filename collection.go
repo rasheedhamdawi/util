@@ -5,6 +5,7 @@ type Element interface{}
 
 // Collection ...
 type Collection interface {
+	Iterable
 	Size() int
 	IsEmpty() bool
 	Add(Element) bool
