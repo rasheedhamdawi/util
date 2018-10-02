@@ -1,8 +1,10 @@
 package util
 
+type elements map[int]Element
+
 type arrayListIterator struct {
-	current  int
-	elements Elements
+	current int
+	elements
 }
 
 func (a *arrayListIterator) Next() Element {
@@ -24,12 +26,12 @@ func (a *arrayListIterator) HasNext() bool {
 // ArrayList ...
 type ArrayList struct {
 	arrayListIterator
-	Elements
+	elements
 }
 
 // Size ...
 func (a *ArrayList) Size() int {
-	return len(a.Elements)
+	return len(a.elements)
 }
 
 // IsEmpty ...
@@ -44,12 +46,12 @@ func (a *ArrayList) IsEmpty() bool {
 // Add ...
 func (a *ArrayList) Add(e Element) bool {
 	// check if the list is empty make new one
-	if a.Elements == nil {
-		a.Elements = make(map[int]Element)
+	if a.elements == nil {
+		a.elements = make(elements)
 	}
 
 	// add a new element to the end of the list
-	if a.Elements[a.Size()] = e; a.Elements[a.Size()-1] == e {
+	if a.elements[a.Size()] = e; a.elements[a.Size()-1] == e {
 		return true
 	}
 
@@ -58,8 +60,7 @@ func (a *ArrayList) Add(e Element) bool {
 
 // Contains ...
 func (a *ArrayList) Contains(e Element) bool {
-
-	for _, item := range a.Elements {
+	for _, item := range a.elements {
 		if item == e {
 			return true
 		}
@@ -70,13 +71,13 @@ func (a *ArrayList) Contains(e Element) bool {
 
 // Get ...
 func (a *ArrayList) Get(i int) Element {
-	return a.Elements[i]
+	return a.elements[i]
 }
 
 // IndexOf ...
 func (a *ArrayList) IndexOf(e Element) int {
 
-	for index, item := range a.Elements {
+	for index, item := range a.elements {
 		if item == e {
 			return index
 		}
@@ -86,19 +87,19 @@ func (a *ArrayList) IndexOf(e Element) int {
 
 // Clear ...
 func (a *ArrayList) Clear() {
-	a.Elements = make(map[int]Element)
+	a.elements = make(elements)
 }
 
 // Remove ...
 func (a *ArrayList) Remove(e Element) error {
-	delete(a.Elements, a.IndexOf(e))
+	delete(a.elements, a.IndexOf(e))
 
 	return nil
 }
 
 // Set ...
 func (a *ArrayList) Set(index int, e Element) error {
-	a.Elements[index] = e
+	a.elements[index] = e
 
 	return nil
 }
@@ -111,12 +112,12 @@ func (a *ArrayList) AddAt(index int, e Element) error {
 
 // ForEach ...
 func (a *ArrayList) ForEach(cb func(int, Element)) {
-	for i, v := range a.Elements {
+	for i, v := range a.elements {
 		cb(i, v)
 	}
 }
 
 // Iterator ...
 func (a *ArrayList) Iterator() Iterator {
-	return &arrayListIterator{elements: a.Elements, current: 0}
+	return &arrayListIterator{elements: a.elements, current: 0}
 }
