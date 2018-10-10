@@ -12,4 +12,5 @@ type Collection interface {
 	Remove(Element) error
 	Contains(Element) bool
 	Clear()
+	ToArray() []Element
 }

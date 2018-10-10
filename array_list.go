@@ -110,6 +110,17 @@ func (a *ArrayList) AddAt(index int, e Element) error {
 	return nil
 }
 
+// ToArray ...
+func (a *ArrayList) ToArray() []Element {
+	elements := make([]Element, a.Size())
+
+	for i, v := range a.elements {
+		elements[i] = v
+	}
+
+	return elements
+}
+
 // ForEach ...
 func (a *ArrayList) ForEach(cb func(int, Element)) {
 	for i, v := range a.elements {
