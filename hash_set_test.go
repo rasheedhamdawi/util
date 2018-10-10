@@ -84,6 +84,17 @@ func (suite *HashSetSuite) TestForEach() {
 	})
 }
 
+func (suite *HashSetSuite) TestItems() {
+
+	suite.hashSet.Add("Python")
+	suite.hashSet.Add("Go")
+	suite.hashSet.Add("Java")
+
+	for val := range suite.hashSet.Items() {
+		assert.Contains(suite.T(), []string{"Go", "Java", "Python"}, val)
+	}
+}
+
 func TestHashSetSuite(t *testing.T) {
 	suite.Run(t, new(HashSetSuite))
 }

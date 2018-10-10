@@ -132,3 +132,17 @@ func (a *ArrayList) ForEach(cb func(int, Element)) {
 func (a *ArrayList) Iterator() Iterator {
 	return &arrayListIterator{elements: a.elements, current: 0}
 }
+
+// Items ...
+func (a *ArrayList) Items() <-chan Element {
+	ch := make(chan Element)
+
+	go func() {
+		for _, element := range a.elements {
+			ch <- element
+		}
+		close(ch)
+	}()
+
+	return ch
+}

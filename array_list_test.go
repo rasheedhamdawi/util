@@ -84,6 +84,16 @@ func (suite *ArrayListSuite) TestForEach() {
 	})
 }
 
+func (suite *ArrayListSuite) TestItems() {
+	suite.arrayList.Add("Python")
+	suite.arrayList.Add("Go")
+	suite.arrayList.Add("Java")
+
+	for val := range suite.arrayList.Items() {
+		assert.Contains(suite.T(), []string{"Go", "Java", "Python"}, val)
+	}
+}
+
 func TestArrayListSuite(t *testing.T) {
 	suite.Run(t, new(ArrayListSuite))
 }

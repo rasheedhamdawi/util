@@ -110,3 +110,17 @@ func (s *HashSet) ToArray() []Element {
 func (s *HashSet) Iterator() Iterator {
 	return &hashSetIterator{items: s.ToArray(), current: 0}
 }
+
+// Items ...
+func (s *HashSet) Items() <-chan Element {
+	ch := make(chan Element)
+
+	go func() {
+		for item := range s.items {
+			ch <- item
+		}
+		close(ch)
+	}()
+
+	return ch
+}

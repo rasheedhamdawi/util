@@ -13,4 +13,5 @@ type Collection interface {
 	Contains(Element) bool
 	Clear()
 	ToArray() []Element
+	Items() <-chan Element
 }
